@@ -10,6 +10,7 @@ import math
 import os
 import helper
 present_dir=os.path.dirname(os.path.abspath(__file__))
+path="\data\AMZN.csv"
 # XGboost regressor
 # Random Forest Regressor
 # LSTM
@@ -18,26 +19,20 @@ present_dir=os.path.dirname(os.path.abspath(__file__))
 # Interpretebility using lime
 
 class Models(object):
-    def __init__(self,path):        
-        data = pd.read_csv(present_dir+path, error_bad_lines=False,header=0, parse_dates=[1], index_col=0, squeeze=True)
-        data["Adj Close"] = data["Adj Close"].astype(float)
-        data=data.loc[:,"Adj Close"]
-        data=data[:100]
-        self.uni_data=pd.Series(data)
         
     def ret_uni_data(self):        
         plt.figure(num=None, figsize=(20, 2), dpi=100,facecolor='w', edgecolor='k')
-        plt.plot(self.uni_data.index,self.uni_data["Adj Close"],marker='*', color='maroon')
+        plt.plot(data.index,data["Adj Close"],marker='*', color='maroon')
         plt.show()        
 
-    def uni_baseline(self,steps):
+    def uni_baseline(self,data,steps):
         pred_values=[]
 
         end =steps
-        values = self.uni_data[:-end]
-        actual_values = self.uni_data[len(self.uni_data)-end:]
+        values = data[:-end]
+        actual_values = data[len(data)-end:]
         pred_values=[]
-        indexes=self.uni_data[len(self.uni_data)-end:].index
+        indexes=data[len(data)-end:].index
 
         for i in range(1,len(actual_values)):
             pred_values.append(actual_values[i])
@@ -57,27 +52,23 @@ class Models(object):
         print("RMSE VALUE : ",rmse)
         return { "model":"Baseline","index":list(indexes), "actual":list(actual_values.values), "predicted":list(pred_values),"rmse":rmse}
          
-    def uni_sarima(self,steps):
-        return helper.sarima(self.uni_data,steps)
-        pass
+    def uni_sarima(self,data,steps):
+        return helper.sarima(data,steps)
 
-    def uni_arima_ann(self,steps):
-        pass
-
-    def multi_elasticnet(self,steps):
-        pass
-
-    def multi_lstm(self,steps):
-        pass
-
-    def multi_cnn_lstm(self,steps):
-        pass
+    def lstm(self,data,steps):
+        return helper.lstm(data,steps)
 
 if __name__=="__main__":
-    steps=10
-    obj=Models("\data\data_ub.csv")
-    obj.uni_baseline(steps)
-    #obj.uni_sarima(steps)
-    
+    data = pd.read_csv(present_dir+path, error_bad_lines=False,header=0, parse_dates=[1], index_col=0, squeeze=True)
+    data["Adj Close"] = data["Adj Close"].astype(float)
+    data=data.loc[:,"Adj Close"]
+    data=data[:500]
+    data=pd.Series(data)
 
+    steps=10
+    obj=Models()
+    obj.uni_baseline(data,steps)
+    #print(obj.uni_sarima(data,steps))
+    print(obj.lstm(data,steps))
+    
 
