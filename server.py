@@ -1,5 +1,4 @@
 from flask import Flask, render_template,jsonify
-import read_data
 import pandas as pd
 import os
 import json
@@ -10,7 +9,7 @@ import wiki
 
 steps=10
 present_dir=os.path.dirname(os.path.abspath(__file__))
-path="\data\data_ub.csv"
+path="/data/data_ub.csv"
 dname=""
 
 data = pd.read_csv(present_dir+path, error_bad_lines=False,header=0, parse_dates=[1], index_col=0, squeeze=True)
@@ -24,7 +23,7 @@ app = Flask(__name__)
 @app.route("/amazon",methods=["get"])
 def amazon():
     
-       path="\data\AMZN.csv"
+       path="/data/AMZN.csv"
        global dname
        dname="Amazon"
        return "Success"
@@ -32,7 +31,7 @@ def amazon():
 @app.route("/apple",methods=["get"])
 def apple():
     try:
-       path="\data\AAPL.csv"
+       path="/data/AAPL.csv"
        global dname
        dname="Apple"
        return "Success"
@@ -42,7 +41,7 @@ def apple():
 @app.route("/ubhack",methods=["get"])
 def ub():
     try:
-       path="\data\data_ub.csv"
+       path="/data/data_ub.csv"
        global dname
        dname="UB"
        return "Success"
