@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Bungee|Comfortaa|Bungee+Hairline&display=swap');
+
+html,body {
+  margin: 0;
+}
+
+.view {
+  flex: 1 1 auto;
+  display: block;
+  width: 100%;
+  background: var(--color-background-1);
+}
+
+.highcharts-credits {
+  display: none !important;
+}
+
+@font-face {
+  font-family: 'LCD';
+  src: url(src/assets/fonts/lcd.ttf);
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(src/assets/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+  local('MaterialIcons-Regular'),
+  url(src/assets/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
+  url(src/assets/iconfont/MaterialIcons-Regular.woff) format('woff'),
+  url(src/assets/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+}
+.material-icons {
+  font-family: 'Material Icons', serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
